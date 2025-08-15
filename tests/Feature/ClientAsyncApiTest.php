@@ -145,7 +145,7 @@ it('can initialize connection asynchronously', function () {
         'protocolVersion' => '2024-11-05',
         'serverInfo' => ['name' => 'AsyncMockServer', 'version' => '2.0'],
         'capabilities' => ['tools' => new \stdClass],
-        'instructions' => 'You are a helpful assistant',
+        'instructions' => 'test instructions',
     ];
     $initResponse = new Response(id: $initRequestId, result: $initResultData);
 
@@ -161,7 +161,7 @@ it('can initialize connection asynchronously', function () {
     expect($this->client->getStatus())->toBe(ConnectionStatus::Ready);
     expect($this->client->getServerName())->toBe('AsyncMockServer');
     expect($this->client->getServerVersion())->toBe('2.0');
-    expect($this->client->getInstructions())->toBe('You are a helpful assistant');
+    expect($this->client->getInstructions())->toBe('test instructions');
 
 })->group('usesLoop');
 
