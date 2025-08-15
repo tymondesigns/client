@@ -83,6 +83,8 @@ class Client
 
     protected string $preferredProtocolVersion = '2024-11-05';
 
+    protected string $instructions = null;
+
     /**
      * @internal Use ClientBuilder::make()->...->build() instead.
      */
@@ -126,6 +128,11 @@ class Client
     public function getNegotiatedCapabilities(): ?Capabilities
     {
         return $this->serverCapabilities;
+    }
+
+    public function getInstructions(): ?string
+    {
+        return $this->instructions;
     }
 
     public function getNegotiatedProtocolVersion(): ?string
@@ -920,6 +927,7 @@ class Client
                 $this->serverName = $initResult->serverName;
                 $this->serverVersion = $initResult->serverVersion;
                 $this->serverCapabilities = $initResult->capabilities;
+                $this->instructions = $initResult->instructions;
 
                 $this->logger->debug("Sending 'initialized' notification to '{$this->getServerName()}'.");
 

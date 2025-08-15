@@ -71,7 +71,8 @@ function simulateSuccessfulHandshake(
     &$messageListenerCallback,
     MockInterface&TransportInterface $mockTransport,
     LoopInterface $loop,
-    ?array $serverCaps = null
+    ?array $serverCaps = null,
+    ?string $instructions = null,
 ): void {
     $connectDeferred = new Deferred;
     $mockTransport->shouldReceive('connect')->once()->andReturn($connectDeferred->promise());
@@ -91,6 +92,7 @@ function simulateSuccessfulHandshake(
         'protocolVersion' => '2024-11-05',
         'serverInfo' => ['name' => 'MockServer', 'version' => '1.0'],
         'capabilities' => $serverCaps ?? ['tools' => new stdClass],
+        'instructions' => $instructions,
     ];
     $initResponse = new Response($initRequestId, $initResultData);
     $loop->addTimer(0.003, fn () => $initResponseDeferred->resolve(null));

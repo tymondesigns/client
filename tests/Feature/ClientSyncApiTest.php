@@ -70,7 +70,8 @@ it('initializes successfully', function () {
         $initRequestId,
         $this->messageListenerCallback,
         $this->mockTransport,
-        $this->loop
+        $this->loop,
+        'You are a helpful assistant',
     );
 
     // Act
@@ -80,6 +81,7 @@ it('initializes successfully', function () {
     expect($returnedClient)->toBe($this->client);
     expect($this->client->getStatus())->toBe(ConnectionStatus::Ready);
     expect($this->client->getServerName())->toBe('MockServer');
+    expect($this->client->getInstructions())->toBe('You are a helpful assistant');
 
 })->group('usesLoop');
 
